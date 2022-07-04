@@ -14,7 +14,7 @@ export const status = (req, res) =>{
         res.json({
             error: false,
             status:200,
-            mesage: "Api funcionando",        
+            mesage: "Api usuarios funcionando",        
         });
     } catch (error) {
         res.json({

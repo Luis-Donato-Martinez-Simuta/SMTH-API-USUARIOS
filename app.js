@@ -5,7 +5,7 @@ import cors from 'cors';
 // Objertos creados
 import userRoutes from './routes/User.routes.js';
 import './database/mysql.database.js';
-import {serveConfig} from './config/serve.confing.js'
+import {serveConfig} from './config/server.confing.js'
 
 const app = express();
 

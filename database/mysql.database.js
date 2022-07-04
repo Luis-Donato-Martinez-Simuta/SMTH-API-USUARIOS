@@ -1,5 +1,5 @@
 import { createConnection } from 'mysql';
-import {databaseConfig} from '../config/serve.confing.js'
+import {databaseConfig} from '../config/server.confing.js'
 
 
 const connection = createConnection({
