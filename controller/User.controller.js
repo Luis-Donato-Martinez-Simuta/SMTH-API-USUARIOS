@@ -6,22 +6,25 @@ import {
     _deletUser
 } from '../model/User.model.js';
 import jwt from 'jsonwebtoken';
+import {
+    userConfig
+} from '../config/server.confing.js';
 
 
-export const status = (req, res) =>{
+export const status = (req, res) => {
     try {
-        
+
         res.json({
             error: false,
-            status:200,
-            mesage: "Api usuarios funcionando",        
+            status: 200,
+            mesage: "Api usuarios funcionando",
         });
     } catch (error) {
         res.json({
             error: true,
-            status:500,
-            mesage: "Error en el servidor",        
-        }); 
+            status: 500,
+            mesage: "Error en el servidor",
+        });
     }
 
 }
@@ -37,10 +40,10 @@ export const loginUser = (req, res) => {
         login(user, (data) => {
             user = data;
             if (data) {
-                //console.log(user);
+                
                 jwt.sign({
                     user
-                }, 'secretkey', {
+                }, userConfig.SECRET, {
                     expiresIn: '1h'
                 }, (err, token) => {
                     if (err) {
@@ -50,7 +53,7 @@ export const loginUser = (req, res) => {
                             mesage: "Error en el servidor",
                         });
                     } else {
-                        //console.log(token)
+                        
                         res.json({
                             error: false,
                             mesage: "Usuario encontrado",
@@ -71,7 +74,7 @@ export const loginUser = (req, res) => {
 
         });
     } catch (error) {
-        //console.log(error);
+        
         res.json({
             error: true,
             mesage: "Error en el servidor",
@@ -108,12 +111,12 @@ export const allUsers = (req, res) => {
 export const addUser = (req, res) => {
 
     let user = {
-        IdTypeUser : req.body.IdTypeUser,
-        fullname : req.body.fullname,
-        username : req.body.username,
-        password : req.body.password,
-        mail : req.body.mail,
-        numberPhone : req.body.numberPhone,
+        IdTypeUser: req.body.IdTypeUser,
+        fullname: req.body.fullname,
+        username: req.body.username,
+        password: req.body.password,
+        mail: req.body.mail,
+        numberPhone: req.body.numberPhone,
     };
 
     try {
@@ -142,23 +145,23 @@ export const addUser = (req, res) => {
 export const updateUser = (req, res) => {
 
     let user = {
-        IdUser : req.body.IdUser,
-        IdTypeUser : req.body.IdTypeUser,
-        fullname : req.body.fullname,
-        username : req.body.username,
-        password : req.body.password,
-        mail : req.body.mail,
-        numberPhone : req.body.numberPhone,
+        IdUser: req.body.IdUser,
+        IdTypeUser: req.body.IdTypeUser,
+        fullname: req.body.fullname,
+        username: req.body.username,
+        password: req.body.password,
+        mail: req.body.mail,
+        numberPhone: req.body.numberPhone,
     };
 
     try {
         _updateUser(user, (data) => {
-            
+
             //console.log(data);
             res.json({
                 error: false,
-                status:200,
-                mesage: "Usuario actualizado",                
+                status: 200,
+                mesage: "Usuario actualizado",
             });
         });
     } catch (error) {
@@ -172,15 +175,15 @@ export const updateUser = (req, res) => {
 };
 
 
-export const deletUser  = (req, res) => {
+export const deletUser = (req, res) => {
     let IdUser = req.params.IdUser;
-    
+
     try {
-        _deletUser(IdUser,(data) =>{
+        _deletUser(IdUser, (data) => {
             res.json({
                 error: false,
-                status:200,
-                mesage: "Usuario eliminado",                
+                status: 200,
+                mesage: "Usuario eliminado",
             });
         });
     } catch (error) {
@@ -192,5 +195,17 @@ export const deletUser  = (req, res) => {
     }
 
 
+
+}
+
+
+export const validatedUser = (req, res) => {
+
+    //res.sendStatus(200)
+    res.json({
+        error: false,
+        status: 200,
+        mesage: "Acceso autorizado",
+    });
 
 }

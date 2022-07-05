@@ -30,7 +30,7 @@ export const getAllUsers = (callback) => {
             throw err
         };
         if (data.length > 0) {
-            //console.log(data);
+            
             return callback(data[0]);
         };
 

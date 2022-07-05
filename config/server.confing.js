@@ -19,3 +19,9 @@ export const databaseConfig = {
 export const serveConfig = {
     PORT_SERVE_API : 3000     
 }
+
+export const userConfig = {
+    SECRET : "4a6e1f9dd63b50d59632737dba567931",
+
+}
+

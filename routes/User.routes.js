@@ -1,6 +1,10 @@
 import { Router } from "express";
-import { loginUser, allUsers, addUser,updateUser, status, deletUser } from "../controller/User.controller.js";
+import { loginUser, allUsers, addUser,updateUser, status, deletUser, validatedUser } from "../controller/User.controller.js";
 import jwt from 'jsonwebtoken';
+import {
+  userConfig
+} from '../config/server.confing.js';
+
 const router = Router();
 
 router.get('/',status);
@@ -15,16 +19,17 @@ router.put('/updateUser',verifyToken,updateUser);
 
 router.delete('/deleteUser/:IdUser',verifyToken,deletUser);
 
+router.post('/validate-token', verifyToken, validatedUser);
+
 function verifyToken(req, res, next){
-    console.log("Validando token");
     const {token} =  req.body;
-    console.log("token",token);
 
     if (typeof token != undefined) {
-        jwt.verify(token, "secretkey", (err, decoded) => {      
+
+        jwt.verify(token, userConfig.SECRET, (err, decoded) => {      
           if (err) {
             res.sendStatus(403);
-            res.json({ mensaje: 'Acceso denegado' });    
+            res.json({ mensaje: 'Acceso denegado'});    
           } else {
             req.decoded = decoded;    
             next();
