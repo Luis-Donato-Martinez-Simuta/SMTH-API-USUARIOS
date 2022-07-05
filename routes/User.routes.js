@@ -6,10 +6,10 @@ import {
 } from '../config/server.confing.js';
 
 const router = Router();
-
+// end-point para checar estaus de la api
 router.get('/',status);
-
-router.post('/allUsers',verifyToken,allUsers);
+// end-pont para obtener todos los usuarios
+router.post('/allUsers', verifyToken, allUsers);
 
 router.post('/login',loginUser);
 
@@ -23,24 +23,30 @@ router.post('/validate-token', verifyToken, validatedUser);
 
 function verifyToken(req, res, next){
     const {token} =  req.body;
-
+    let forb = {
+      error:false,
+      status:403, 
+      mesage: 'Acceso denegado',
+    } 
     if (typeof token != undefined) {
 
         jwt.verify(token, userConfig.SECRET, (err, decoded) => {      
           if (err) {
-            res.sendStatus(403);
-            res.json({ mensaje: 'Acceso denegado'});    
+            res.send({ 
+              error:false,
+              status:403, 
+              mesage: 'Acceso denegado',
+            });  
           } else {
             req.decoded = decoded;    
             next();
           }
         });
       } else {
-        res.sendStatus(403);
         res.send({ 
             error:false,
+            status:403, 
             mesage: 'Acceso denegado',
-            status:4003, 
         });
       }
 

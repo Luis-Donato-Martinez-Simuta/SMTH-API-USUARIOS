@@ -16,8 +16,6 @@ app.use('/api/user',userRoutes);
 
 let PORT = serveConfig.PORT_SERVE_API;
 
-console.log(serveConfig);
-
 app.listen(PORT, async () => {
     console.log("Servidor corriendo en el puerto", PORT);
 });

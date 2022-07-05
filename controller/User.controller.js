@@ -73,8 +73,7 @@ export const loginUser = (req, res) => {
             }
 
         });
-    } catch (error) {
-        
+    } catch (error) {        
         res.json({
             error: true,
             mesage: "Error en el servidor",
@@ -84,7 +83,6 @@ export const loginUser = (req, res) => {
 }
 
 export const allUsers = (req, res) => {
-
     try {
         getAllUsers((data) => {
             let users = data;
@@ -103,9 +101,6 @@ export const allUsers = (req, res) => {
             error,
         })
     }
-
-
-
 };
 
 export const addUser = (req, res) => {
@@ -138,8 +133,6 @@ export const addUser = (req, res) => {
     }
 
 };
-
-
 
 
 export const updateUser = (req, res) => {
@@ -193,11 +186,7 @@ export const deletUser = (req, res) => {
             error,
         })
     }
-
-
-
 }
-
 
 export const validatedUser = (req, res) => {
 
