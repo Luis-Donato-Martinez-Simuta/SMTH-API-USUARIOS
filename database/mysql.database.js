@@ -3,13 +3,13 @@ import {databaseConfig} from '../config/server.confing.js'
 
 
 
-const connection = createConnection({
-    host : databaseConfig.HOST,
-    database : databaseConfig.NAME_DATABASE,
-    user : databaseConfig.USERNAME,
-    password : databaseConfig.PASSWPRD,
-    port : databaseConfig.PORT
-});
+export const databaseConfig = {
+    HOST :  "200.52.83.41",
+    USERNAME : "rhchia_admin",
+    PASSWPRD :   "admin@2021",
+    DATABASE:  "rhchia_db_erp",
+    PORT :  3306,
+}
 
 let _drc
 if(databaseConfig.HOST == "127.0.0.1"){
